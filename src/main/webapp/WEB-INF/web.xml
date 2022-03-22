@@ -3,29 +3,94 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:sqlserver://localhost:1433;datebase=userdb;encrypt=false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>sa</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>admin123456789</param-value>
+    </context-param>
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>XiaoShuhui</param-value>
+    </context-param>
+    <context-param>
+        <param-name>studentid</param-name>
+        <param-value>2020211001001201</param-value>
+    </context-param>
     <servlet>
         <servlet-name>XiaoShuhui</servlet-name>
         <servlet-class>com.XiaoShuhui.week2.demo.HelloWorldServlet</servlet-class>
     </servlet>
-    <servlet>
+<!--    <servlet>
         <servlet-name>LifeCycleServlet</servlet-name>
-        <servlet-class>com.XiaoShuhui.week3.demo.LifeCycleServlet</servlet-class>
-    </servlet>
+       <servlet-class>com.XiaoShuhui.week3.demo.LifeCycleServlet</servlet-class>
+    </servlet>-->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.XiaoShuhui.week3.demo.RegisterServlet</servlet-class>
     </servlet>
+    <!--<servlet>
+        <servlet-name>ConfigDeomServlet</servlet-name>
+        <servlet-class>com.XiaoShuhui.week4.demo.ConfigDeomServlet</servlet-class>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>XiaoShuhui</param-value>
+        </init-param>
+        <init-param>
+            <param-name>studentid</param-name>
+            <param-value>2020211001001201</param-value>
+        </init-param>
+    </servlet>-->
+    <!--<servlet>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <servlet-class>com.XiaoShuhui.week4.demo.JDBCDemoServlet</servlet-class>
+        <init-param>
+            <param-name>driver</param-name>
+            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>jdbc:sqlserver://localhost:1433; datebase=userdb;encrypt=false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>sa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>admin123456789</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>-->
     <servlet-mapping>
         <servlet-name>XiaoShuhui</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <!--<servlet-mapping>
         <servlet-name>LifeCycleServlet</servlet-name>
         <url-pattern>/life</url-pattern>
-        <!--/life==LifeCycleServlet==com.XiaoShuhui.week3.demo.LifeCycleServlet-->
-    </servlet-mapping>
+    </servlet-mapping> -->
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <!--<servlet-mapping>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <url-pattern>/jdbc</url-pattern>
+    </servlet-mapping>-->
+    <!--<servlet-mapping>
+        <servlet-name>ConfigDeomServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>-->
 </web-app>
