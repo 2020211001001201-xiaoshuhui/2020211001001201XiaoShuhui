@@ -1,4 +1,4 @@
-package com.XiaoShuhui.week3.demo;
+package com.XiaoShuhui.week3;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;

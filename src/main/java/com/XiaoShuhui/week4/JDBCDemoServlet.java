@@ -1,4 +1,4 @@
-package com.XiaoShuhui.week4.demo;
+package com.XiaoShuhui.week4;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;

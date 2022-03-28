@@ -9,7 +9,7 @@
     </context-param>
     <context-param>
         <param-name>url</param-name>
-        <param-value>jdbc:sqlserver://localhost:1433;datebase=userdb;encrypt=false</param-value>
+        <param-value>jdbc:sqlserver://localhost:1433;database=userdb;encrypt=false</param-value>
     </context-param>
     <context-param>
         <param-name>username</param-name>
@@ -29,19 +29,23 @@
     </context-param>
     <servlet>
         <servlet-name>XiaoShuhui</servlet-name>
-        <servlet-class>com.XiaoShuhui.week2.demo.HelloWorldServlet</servlet-class>
+        <servlet-class>com.XiaoShuhui.week2.HelloWorldServlet</servlet-class>
     </servlet>
 <!--    <servlet>
         <servlet-name>LifeCycleServlet</servlet-name>
-       <servlet-class>com.XiaoShuhui.week3.demo.LifeCycleServlet</servlet-class>
+       <servlet-class>LifeCycleServlet</servlet-class>
     </servlet>-->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.XiaoShuhui.week3.demo.RegisterServlet</servlet-class>
+        <servlet-class>com.XiaoShuhui.week3.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.XiaoShuhui.week5.LoginServlet</servlet-class>
     </servlet>
     <!--<servlet>
         <servlet-name>ConfigDeomServlet</servlet-name>
-        <servlet-class>com.XiaoShuhui.week4.demo.ConfigDeomServlet</servlet-class>
+        <servlet-class>ConfigDeomServlet</servlet-class>
         <init-param>
             <param-name>name</param-name>
             <param-value>XiaoShuhui</param-value>
@@ -53,7 +57,7 @@
     </servlet>-->
     <!--<servlet>
         <servlet-name>JDBCDemoServlet</servlet-name>
-        <servlet-class>com.XiaoShuhui.week4.demo.JDBCDemoServlet</servlet-class>
+        <servlet-class>JDBCDemoServlet</servlet-class>
         <init-param>
             <param-name>driver</param-name>
             <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
@@ -93,4 +97,8 @@
         <servlet-name>ConfigDeomServlet</servlet-name>
         <url-pattern>/config</url-pattern>
     </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>
