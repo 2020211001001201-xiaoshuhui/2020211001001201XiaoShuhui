@@ -43,6 +43,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.XiaoShuhui.week5.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RedirectServlet</servlet-name>
+        <servlet-class>com.XiaoShuhui.week6.RedirectServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>com.XiaoShuhui.week6.SearchServlet</servlet-class>
+    </servlet>
     <!--<servlet>
         <servlet-name>ConfigDeomServlet</servlet-name>
         <servlet-class>ConfigDeomServlet</servlet-class>
@@ -64,7 +72,7 @@
         </init-param>
         <init-param>
             <param-name>url</param-name>
-            <param-value>jdbc:sqlserver://localhost:1433; datebase=userdb;encrypt=false</param-value>
+            <param-value>jdbc:sqlserver://localhost:1433; database=userdb;encrypt=false</param-value>
         </init-param>
         <init-param>
             <param-name>username</param-name>
@@ -100,5 +108,13 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectServlet</servlet-name>
+        <url-pattern>/redirect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
 </web-app>

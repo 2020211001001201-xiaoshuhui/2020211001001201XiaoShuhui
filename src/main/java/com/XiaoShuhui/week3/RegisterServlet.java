@@ -1,15 +1,17 @@
 package com.XiaoShuhui.week3;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-
+//@WebServlet(urlPatterns = {"/register"},loadOnStartup = 1)
 public class RegisterServlet extends HttpServlet {
     Connection con = null;
-    public void init(){
-        ServletContext context =getServletContext();
+    public void init() throws ServletException{
+        super.init();
+        /*ServletContext context =getServletContext();
         String driver=context.getInitParameter("driver");
         String url=context.getInitParameter("url");
         String username=context.getInitParameter("username");
@@ -18,20 +20,22 @@ public class RegisterServlet extends HttpServlet {
         try {
             Class.forName(driver);
             con= DriverManager.getConnection(url,username,password);
-            System.out.println("Connection --> in JDBCDemoServlet"+con);//just print for test
+            System.out.println("init()-->"+con);//just print for test
             //one connection -
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+        con=(Connection) getServletContext().getAttribute("con");//name od attribute
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("register serlvet doGet");
-        response.sendRedirect("./register.jsp");
+        doPost(request,response);
+        //System.out.println("register servlet doGet");
+        //response.sendRedirect("./register.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("register servlet dopost");
+        //System.out.println("register servlet dopost");
         PrintWriter writer = response.getWriter();
         String username = request.getParameter("username");//name of input type
         String password = request.getParameter("password");
@@ -45,20 +49,27 @@ public class RegisterServlet extends HttpServlet {
         System.out.println(birthDate);
 
         try {
+            Statement st=con.createStatement();
             String sql = "insert into usertable(username,password,email,gender,birthDate) values(\'"+username+"\',\'"
                     +password+"\',\'"+email+"\',\'"+gender+"\',\'"+birthDate+"\')";
             // insert data into database
-            con.setAutoCommit(false);
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.executeUpdate();
-            con.commit();
-            System.out.println("insert successfully");
+            System.out.println("sql"+sql);
+            int n=st.executeUpdate(sql);
+            System.out.println("n-->"+n);
+            /*//con.setAutoCommit(false);
+            //PreparedStatement preparedStatement = con.prepareStatement(sql);
+            //preparedStatement.executeUpdate();
+            //con.commit();
+            //System.out.println("insert successfully");*/
             // select all rows from usertable
-            sql = "select * from usertable";
-            con.setAutoCommit(false);
-            preparedStatement = con.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            writer.println("<table border=\"1\">");
+            //sql = "select * from usertable";
+            //ResultSet rs=st.executeQuery(sql);
+            //PrintWriter out=response.getWriter();
+            //con.setAutoCommit(false);
+            //preparedStatement = con.prepareStatement(sql);
+            //ResultSet rs = preparedStatement.executeQuery();
+            //here is html code--move these html code in a jsp page-userList.jsp
+            /*writer.println("<table border=\"1\">");
             writer.println("<tr>");
             writer.println("<th>ID</th>");
             writer.println("<th>username</th>");
@@ -67,20 +78,24 @@ public class RegisterServlet extends HttpServlet {
             writer.println("<th>gender</th>");
             writer.println("<th>birthDate</th>");
             writer.println("</tr>");
-            while (resultSet.next()) {
+            while (rs.next()) {
                 writer.println("<tr>");
-                writer.println("<td>"+resultSet.getString("id")+"</td>");
-                writer.println("<td>"+resultSet.getString("username")+"</td>");
-                writer.println("<td>"+resultSet.getString("password")+"</td>");
-                writer.println("<td>"+ resultSet.getString("email")+"</td>");
-                writer.println("<td>"+resultSet.getString("gender")+"</td>");
-                writer.println("<td>"+ resultSet.getString("birthDate")+"</td>");
+                writer.println("<td>"+rs.getString("id")+"</td>");
+                writer.println("<td>"+rs.getString("username")+"</td>");
+                writer.println("<td>"+rs.getString("password")+"</td>");
+                writer.println("<td>"+ rs.getString("email")+"</td>");
+                writer.println("<td>"+rs.getString("gender")+"</td>");
+                writer.println("<td>"+ rs.getString("birthDate")+"</td>");
                 writer.println("<tr>");
             }
             writer.println("</table>");
             con.commit();
 
-            writer.close();
+            writer.close();*/
+            //request.setAttribute("rsname",rs);
+            //request.getRequestDispatcher("userList.jsp").forward(request,response);
+            //System.out.println("i am in RegisterServlet-->doPost()-->after forward()");
+            response.sendRedirect("login.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }
