@@ -16,6 +16,6 @@
 <form method="post" action="login">
     username<input type="text" name="username"/><br/>
     password<input type="password" name="password"/><br/>
-    <input type="submit" value="submit"/>
+    <input type="submit" value="sumbit"/>
 </form>
 <%@include file="footer.jsp"%>

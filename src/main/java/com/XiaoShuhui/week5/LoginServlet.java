@@ -1,14 +1,14 @@
 package com.XiaoShuhui.week5;
 
+import com.XiaoShuhui.dao.UserDao;
+import com.XiaoShuhui.model.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 @WebServlet(name = "LoginServlet",value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -32,7 +32,9 @@ public class LoginServlet extends HttpServlet {
         con=(Connection) getServletContext().getAttribute("con");
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-doPost(request,response);
+//doPost(request,response);
+        //when user click login menu-request is get
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
     }
 
     @Override
@@ -40,7 +42,20 @@ doPost(request,response);
     String username=request.getParameter("username");
     String password=request.getParameter("password");
     PrintWriter writer = response.getWriter();
+        UserDao userDao=new UserDao();
         try {
+            User user=userDao.findByUsernamePassword(con,username,password);
+            if(user!=null){
+                request.setAttribute("user",user);
+                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+            }else {
+                request.setAttribute("message","Username or Password Error!!!");
+                request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        /*try {
             String sql = "select * from usertable where username=? and password=?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1,username);
@@ -67,6 +82,6 @@ doPost(request,response);
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
