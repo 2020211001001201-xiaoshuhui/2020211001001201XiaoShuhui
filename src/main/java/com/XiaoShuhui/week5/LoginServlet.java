@@ -42,12 +42,45 @@ public class LoginServlet extends HttpServlet {
     String username=request.getParameter("username");
     String password=request.getParameter("password");
     PrintWriter writer = response.getWriter();
-        UserDao userDao=new UserDao();
         try {
+            UserDao userDao=new UserDao();
             User user=userDao.findByUsernamePassword(con,username,password);
             if(user!=null){
-                request.setAttribute("user",user);
-                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+                //add code for remember me
+                String rememberMe=request.getParameter("rememberMe");//1=checked,null if checked
+                if(rememberMe!=null && rememberMe.equals("1")){
+                    //want to remember me
+                    // create 3 cookies
+                    Cookie usernameCookie=new Cookie("cUsername",user.getUsername());
+                    Cookie passwordCookie=new Cookie("cPassword",user.getPassword());
+                    Cookie rememberMeCookie=new Cookie("cRememberMe",rememberMe);
+                    //set age of cookies
+                    usernameCookie.setMaxAge(5);
+                    passwordCookie.setMaxAge(5);
+                    rememberMeCookie.setMaxAge(5);
+                    //add 3 cookies into response
+                    response.addCookie(usernameCookie);
+                    response.addCookie(passwordCookie);
+                    response.addCookie(rememberMeCookie);
+                }
+                //create session
+                HttpSession session=request.getSession();
+                //check session id
+                System.out.println("session id-->"+session.getId());
+                session.setMaxInactiveInterval(10);
+                //create cookie
+                //step1:create an object of cookie class
+                /*Cookie c=new Cookie("sessionid",""+user.getId());
+                //step2 set age of cookie
+                c.setMaxAge(10*60);
+                //step3:add cookie into response
+                //delete cookie
+                Cookie cookie=new Cookie("sessionid","");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                response.addCookie(c);*/
+                session.setAttribute("user",user);
+                 request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
             }else {
                 request.setAttribute("message","Username or Password Error!!!");
                 request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);

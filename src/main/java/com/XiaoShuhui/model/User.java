@@ -8,26 +8,24 @@ public class User {
     private String password;
     private String email;
     private String gender;
-    private java.util.Date birthDate;
+    private String birthDate;
     public User() {
 
     }
 
-    public User(int id,String username,String password,String email,String gender,Date birthDate) {
+    public User(int id,String username,String password,String email,String gender,String birthDate) {
         this.id = id;
         this.username = username;
         this.password=password;
         this.email=email;
         this.gender=gender;
-        this.birthDate=birthDate;
+        this.birthDate= birthDate;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
+    public String getBirthDate() { return birthDate; }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(String birthDate) {
+        this.birthDate =birthDate;
     }
 
     public String getGender() {
@@ -81,5 +79,6 @@ public class User {
                 ", birthDate=" + birthDate +
                 '}';
     }
+
 }
 

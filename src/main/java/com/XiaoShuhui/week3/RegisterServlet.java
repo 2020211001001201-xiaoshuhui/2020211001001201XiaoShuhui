@@ -37,6 +37,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //System.out.println("register servlet dopost");
         PrintWriter writer = response.getWriter();
+        String id=request.getParameter("id");
         String username = request.getParameter("username");//name of input type
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -49,6 +50,15 @@ public class RegisterServlet extends HttpServlet {
         System.out.println(birthDate);
 
         try {
+/*            String sql="insert into usertable values(?,?,?,?,?,?)";
+            PreparedStatement st= con.prepareStatement(sql);
+            st.setString(1,id);
+            st.setString(2,username);
+            st.setString(3,password);
+            st.setString(4,email);
+            st.setString(5,gender);
+            st.setString(6,birthDate);
+            st.executeUpdate();*/
             Statement st=con.createStatement();
             String sql = "insert into usertable(username,password,email,gender,birthDate) values(\'"+username+"\',\'"
                     +password+"\',\'"+email+"\',\'"+gender+"\',\'"+birthDate+"\')";
@@ -95,13 +105,14 @@ public class RegisterServlet extends HttpServlet {
             //request.setAttribute("rsname",rs);
             //request.getRequestDispatcher("userList.jsp").forward(request,response);
             //System.out.println("i am in RegisterServlet-->doPost()-->after forward()");
-            response.sendRedirect("login.jsp");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        response.sendRedirect("login.jsp");
     }
 
-    @Override
+/*    @Override
     public void destroy() {
         super.destroy();
         //close connection here - when stop tomcat
@@ -110,5 +121,5 @@ public class RegisterServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

@@ -22,7 +22,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return true;
         }
@@ -40,13 +40,14 @@ public class UserDao implements IUserDao {
     }
 
     public int updateUser(Connection con, User user) throws SQLException {
-        String sql = "update  usertable set username=? where id=?";
+        String sql = "update  usertable set username=?, password=?,email=?,gender=?,birthDate=? where id=?";
         PreparedStatement st = con.prepareStatement(sql);
-        String username = null;
-        st.setString(1,username);
-        String id = null;
-        st.setString(2,id);
-        st.executeUpdate();
+        st.setString(1,user.getUsername());
+        st.setString(2,user.getPassword());
+        st.setString(3,user.getEmail());
+        st.setString(4,user.getGender());
+        st.setString(5,user.getBirthDate());
+        st.setInt(6,user.getId());
         ResultSet rs = st.executeQuery();
         if (rs.next()) {
             user = new User();
@@ -55,9 +56,9 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
-        return 1;
+        return 0;
     }
 
     public User findById(Connection con, Integer id) throws SQLException {
@@ -73,7 +74,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return user;
     }
@@ -92,7 +93,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return user;
     }
@@ -110,7 +111,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return user;
     }
@@ -128,7 +129,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return user;
     }
@@ -145,7 +146,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return user;
     }
@@ -163,7 +164,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return (List<User>) user;
     }
@@ -181,7 +182,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return (List<User>) user;
     }
@@ -198,7 +199,7 @@ public class UserDao implements IUserDao {
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setGender(rs.getString("gender"));
-            user.setBirthDate(rs.getDate("birthDate"));
+            user.setBirthDate(String.valueOf(rs.getDate("birthDate")));
         }
         return (List<User>) user;
     }
