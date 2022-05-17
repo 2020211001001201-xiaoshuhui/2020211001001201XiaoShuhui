@@ -85,7 +85,7 @@ public class Category {
     }
     public static String findCategoryId(Connection con,int categoryId) {
         String categoryName = null;
-        String queryString = "select CategoryName from Category where categoryId=?";
+        String queryString = "select * from Category where CategoryId=?";
         try {
             PreparedStatement statement = con.prepareStatement(queryString);
             statement.setInt(1, categoryId);

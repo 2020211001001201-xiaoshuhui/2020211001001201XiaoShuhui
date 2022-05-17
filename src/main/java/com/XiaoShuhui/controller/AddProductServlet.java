@@ -44,22 +44,22 @@ public class AddProductServlet extends HttpServlet {
         Product product=new Product();
         product.setProductName(productName);
         product.setPrice(price);
+        product.setPicture(inputStream);
         product.setProductDescription(productDescription);
         product.setCategoryId(categoryId);
 //call same in dao
-        ProductDao productDao= new ProductDao() {
-            @Override
-            public int save(Product product, Connection con) throws SQLException {
-                return 0;
-            }
-        };
+        ProductDao productDao= new ProductDao();
+        int i=0;
         try {
-            int n=productDao.save(product,inputStream,con);
+            i=productDao.save(product,con);
+            if(i>0) {
+                response.sendRedirect("productList");
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        if(1>0)
-            response.sendRedirect("productList");
+
 
     }
 }
