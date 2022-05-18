@@ -13,7 +13,7 @@ public class Assignment1Servlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         index=0;
-        System.out.println("I Am from default constructor");
+        System.out.println("I am from default constructor");
     }
 
     @Override
