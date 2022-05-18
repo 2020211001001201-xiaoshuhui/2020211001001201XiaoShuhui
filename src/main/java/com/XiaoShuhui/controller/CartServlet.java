@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,11 @@ public class CartServlet extends HttpServlet {
             if(request.getParameter("action")==null){
                 displayCart(request,response);
             }else if(request.getParameter("action").equals("add")){
-                buy(request,response);
+                try {
+                    buy(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }else if(request.getParameter("action").equals("remove")){
                 remove(request,response);
             }
@@ -53,15 +58,11 @@ public class CartServlet extends HttpServlet {
         response.sendRedirect(path);
     }
 
-    private void buy(HttpServletRequest request, HttpServletResponse response) {
+    private void buy(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException, SQLException {
         //add item into cart
         HttpSession session=request.getSession();
         int id=request.getParameter("productId")!=null?Integer.parseInt(request.getParameter("productId")):0;
-        int quantity=request.getParameter("quantity")!=null?Integer.parseInt(request.getParameter("quantity")):0;
-        if(id==0 || quantity==0){
-            //error
-            return;
-        }
+        int quantity=request.getParameter("quantity")!=null?Integer.parseInt(request.getParameter("quantity")):1;
         ProductDao productDao=new ProductDao();
         if(session.getAttribute("cart")==null){
             List<Item> cart=new ArrayList<Item>();
@@ -84,11 +85,12 @@ public class CartServlet extends HttpServlet {
             }
             session.setAttribute("cart",cart);
         }//end else
+        response.sendRedirect(request.getContextPath()+"/cart");
     }
 
     private int isExisting(int id, List<Item> cart) {
         for(int i=0;i<cart.size();i++){
-            if(cart.get(id).getProduct().getProductId()==id){
+            if(cart.get(i).getProduct().getProductId()==id){
               return i;//index of product in the cart list
             }
         }
