@@ -24,7 +24,7 @@
 				
 					<tbody>
 					<c:choose>
-					<c:when test="${ empty cart}">
+					<c:when test="${ empty cart}"><!--no item in cart-->
 					<tr><td colspan="5">
 					
 					<div class="content-404 text-center">
