@@ -55,9 +55,9 @@ public class LoginServlet extends HttpServlet {
                     Cookie passwordCookie=new Cookie("cPassword",user.getPassword());
                     Cookie rememberMeCookie=new Cookie("cRememberMe",rememberMe);
                     //set age of cookies
-                    usernameCookie.setMaxAge(5);
-                    passwordCookie.setMaxAge(5);
-                    rememberMeCookie.setMaxAge(5);
+                    usernameCookie.setMaxAge(500);
+                    passwordCookie.setMaxAge(500);
+                    rememberMeCookie.setMaxAge(500);
                     //add 3 cookies into response
                     response.addCookie(usernameCookie);
                     response.addCookie(passwordCookie);
@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session=request.getSession();
                 //check session id
                 System.out.println("session id-->"+session.getId());
-                session.setMaxInactiveInterval(10);
+                session.setMaxInactiveInterval(500);
                 //create cookie
                 //step1:create an object of cookie class
                 /*Cookie c=new Cookie("sessionid",""+user.getId());
