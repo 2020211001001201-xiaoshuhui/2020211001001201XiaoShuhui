@@ -226,5 +226,4 @@
             <taglib-location>/WEB-INF/c.tld</taglib-location>
         </taglib>
     </jsp-config>
-
 </web-app>
